@@ -19,7 +19,17 @@ df_data['Date'] = pd.to_datetime(df_data['Date'])
 
 app.layout = html.Div(
     children=[
-        
+        html.H5('Cidades:'),
+        dcc.Checklist(df_data['City'].value_counts().index,
+        df_data['City'].value_counts().index, id='check_city'),
+
+        html.H5('Variável de análise:'),
+        dcc.RadioItems(['Gross income', 'Rating'], 'Gross income', id='main variable'),
+
+        dcc.Graph(id="city_fig"),
+        dcc.Graph(id="pay_fig"),
+        dcc.Graph(id="income_per_product_fig")
+
     ]
 )
 
@@ -30,4 +40,4 @@ app.layout = html.Div(
 
 
 if __name__ =='__main__':
-    app.run_server(port=8050, debug=True)
+    app.run(debug=True)
